@@ -1,15 +1,19 @@
 package ro.siit.constructors;
 
-import ro.siit.interfaces.Adresa;
-import ro.siit.interfaces.Tara;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-public class Persoana implements Adresa, Tara {
+public class Persoana {
 
     private String name;
     private Integer age;
-    private String address;
-    private Integer houseNumber;
-    private String countryName;
+    private List<Hobby> hobbies = new ArrayList<>();
+
+    public Persoana(String name, Integer age){
+        this.name = name;
+        this.age = age;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -27,37 +31,33 @@ public class Persoana implements Adresa, Tara {
         return age;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setHouseNumber(Integer houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    @Override
-    public Integer getHouseNumber() {
-        return houseNumber;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
     void introduceYourself(){
         System.out.println("I am " + name + " and I am " + age + " years old!");
     }
 
-    void shareStreetDetails(){
-        System.out.println("I live at " + getAddress() + " street, " + "number " + getHouseNumber() + " in " + getCountryName() + "!");
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void adaugareHobby(Hobby hobby){
+        hobbies.add(hobby);
+    }
+
+    @Override
+    public boolean equals(Object p){
+        if (this == p) return true;
+        if (p == null || getClass() != getClass()) return false;
+        Persoana persoana = (Persoana) p;
+        return age == persoana.age && name.equals(persoana.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
     }
 
 }
